@@ -6,15 +6,15 @@ public class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    private double[] position = {0,0};
-    private String direction = "n";
+    protected double[] position = {0,0};
+    protected String direction = "n";
 
 
 
-    private int getNrDoors(){
+    public int getNrDoors(){
         return nrDoors;
     }
-    private double getEnginePower(){
+    public double getEnginePower(){
         return enginePower;
     }
 
@@ -22,15 +22,15 @@ public class Car implements Movable {
         return currentSpeed;
     }
 
-    private Color getColor(){
+    public Color getColor(){
         return color;
     }
 
-    private void setColor(Color clr){
+    public void setColor(Color clr){
         color = clr;
     }
 
-    private void startEngine(){
+    public void startEngine(){
         currentSpeed = 0.1;
     }
 
