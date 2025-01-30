@@ -6,10 +6,19 @@ public class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double[] position = {0,0};
-    protected String direction = "n";
+    protected double x;
+    protected double y;
+    protected int direction;
 
-
+    public Car(int nrDoors, Color color, double enginePower, String modelName){
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.x = 0;
+        this.y = 0;
+    }
 
     public int getNrDoors(){
         return nrDoors;
@@ -50,48 +59,51 @@ public class Car implements Movable {
     public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
+    private void position(){
+        private double[] pos= new double
+        return
+    }
 
     @Override
     public void move(){
-        switch (direction){
-            case "n": position[1]++; break;
-            case "e": position[0]++; break;
-            case "s": position[1]--; break;
-            case "w": position[0]--; break;
-        }
+        double radians = Math.toRadians(direction);
+        x += Math.cos(radians) * currentSpeed;
+        y += Math.sin(radians) * currentSpeed;
     }
 
     @Override
     public void turnLeft(){
-        switch (direction){
-            case "n": direction = "w"; break;
-            case "w": direction = "s"; break;
-            case "s": direction = "e"; break;
-            case "e": direction = "n"; break;
-        }
+        direction += (direction - 90 + 360) % 360;
     }
 
     @Override
     public void turnRight(){
-        switch (direction){
-            case "n": direction = "e"; break;
-            case "e": direction = "s"; break;
-            case "s": direction = "w"; break;
-            case "w": direction = "n"; break;
-        }
+        direction += (direction + 90) % 360;
     }
 
-    // TODO fix this method according to lab pm
+
     public void gas(double amount){
         if (amount > 0 && amount < 1) {
             incrementSpeed(amount);
         }
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount){
         if (amount > 0 && amount < 1) {
             decrementSpeed(amount);
         }
     }
+    public static void main(){
+        Car car = new Car(2, Color.black, 120, "VolvoV70");
+        car.incrementSpeed(0.8);
+        car.turnLeft();
+        car.move();
+        car.move();
+        car.turnRight();
+        car.move();
+        System.out.println(car.getCurrentSpeed());
+        System.out.println();
+    }
+
+
 }
